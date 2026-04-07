@@ -458,12 +458,99 @@
     footer a { color: var(--accent2); text-decoration: none; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .edu-awards-grid { grid-template-columns: 1fr; }
+    /* ── NAV: hide links on iPad / narrow screens ── */
+    @media (max-width: 1024px) {
       .nav-links { display: none; }
+    }
+
+    /* ── TABLET (≤ 768px) ── */
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: 0 4%; }
+      #resume-btn span { display: none; }
+      #resume-btn { padding: 7px 10px; }
+
+      /* Sections */
+      section { padding: 60px 5%; }
+
+      /* Hero */
+      .hero { padding: 80px 5% 50px; }
+      .hero-inner { max-width: 100%; }
+      .hero-contacts { gap: 0.6rem; }
+      .contact-chip { font-size: 0.8rem; padding: 7px 12px; }
+      .hero-cta { gap: 0.75rem; }
+
+      /* About */
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .about-stats { grid-template-columns: 1fr 1fr; }
+
+      /* Skills */
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Projects & Case Studies */
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .project-card:hover { transform: none; }
+
+      /* Education */
+      .edu-awards-grid { grid-template-columns: 1fr 1fr; }
+
+      /* Modal */
+      .case-modal { padding: 1.5rem; }
+      .case-modal-title { font-size: 1.2rem; }
+    }
+
+    /* ── MOBILE (≤ 480px) ── */
+    @media (max-width: 480px) {
+      /* Nav */
+      nav { padding: 0 4%; height: 56px; }
+      .nav-logo { font-size: 1rem; }
+      #resume-btn { padding: 6px 10px; font-size: 0.78rem; }
+
+      /* Sections */
+      section { padding: 50px 4%; }
+
+      /* Hero */
+      .hero { padding: 70px 4% 40px; }
+      .avatar-wrap { width: 140px; height: 140px; }
+      .avatar-container { width: 150px; height: 150px; }
+      .hero h1 { font-size: 2rem; letter-spacing: -1px; }
+      .hero-summary { font-size: 0.9rem; }
+      .hero-contacts { flex-direction: column; align-items: center; }
+      .contact-chip { width: 100%; max-width: 280px; justify-content: center; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 280px; text-align: center; }
+
+      /* About */
+      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .about-stats { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .stat-num { font-size: 1.8rem; }
+
+      /* Skills */
+      .skills-grid { grid-template-columns: 1fr; }
+
+      /* Projects & Case Studies */
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card:hover { transform: none; }
+
+      /* Experience */
+      .exp-card { flex-direction: column; gap: 0.75rem; }
+
+      /* Education */
+      .edu-awards-grid { grid-template-columns: 1fr; }
+
+      /* Contact */
+      #contact > div { flex-direction: column; align-items: center; }
+      #contact .contact-chip { width: 100%; max-width: 300px; justify-content: center; }
+
+      /* Modal */
+      .case-modal-overlay { padding: 0; align-items: flex-end; }
+      .case-modal {
+        border-radius: 20px 20px 0 0;
+        max-height: 92vh;
+        padding: 1.25rem;
+      }
+      .case-modal-header { flex-direction: column; gap: 0.75rem; }
+      .case-modal-title { font-size: 1.1rem; }
     }
 
     /* ── SCROLLBAR ── */
@@ -751,7 +838,7 @@
   <div style="display:flex; align-items:center; gap:0.5rem;">
     <a id="resume-btn" href="resume.pdf" target="_blank" rel="noopener">
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      Resume
+      <span>Resume</span>
     </a>
     <button id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
       <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
