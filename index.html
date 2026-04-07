@@ -41,16 +41,7 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     /* ── Light: avatar ── */
-    html[data-theme="light"] .avatar-glow {
-      background: radial-gradient(circle, rgba(91,71,224,0.15) 0%, rgba(124,92,191,0.06) 50%, transparent 70%);
-    }
-    html[data-theme="light"] .avatar-spin-ring::after { background: var(--bg); }
     html[data-theme="light"] .avatar-wrap { background: var(--bg); }
-    html[data-theme="light"] .orbit-ring { border-color: rgba(91,71,224,0.2); }
-    /* ── Light: orbs ── */
-    html[data-theme="light"] .orb-1 { background: rgba(91,71,224,0.08); }
-    html[data-theme="light"] .orb-2 { background: rgba(2,132,199,0.06); }
-    html[data-theme="light"] .orb-3 { background: rgba(124,92,191,0.07); }
     /* ── Light: cards — add shadow so they lift off the light bg ── */
     html[data-theme="light"] .skill-card,
     html[data-theme="light"] .stat-card,
@@ -62,10 +53,6 @@
     /* ── Light: project card hover shadow ── */
     html[data-theme="light"] .project-card:hover {
       box-shadow: 0 12px 32px rgba(91,71,224,0.18), 0 4px 10px rgba(0,0,0,0.06);
-    }
-    /* ── Light: project card shine — use dark tint instead of white ── */
-    html[data-theme="light"] .project-card::after {
-      background: linear-gradient(105deg, transparent 40%, rgba(0,0,0,0.04) 50%, transparent 60%);
     }
     /* ── Light: project tech tags ── */
     html[data-theme="light"] .project-tech span {
@@ -142,99 +129,18 @@
     .nav-links a:hover { color: var(--text); }
 
     /* ── AVATAR ── */
-    /* ── AVATAR SYSTEM ── */
     .avatar-container {
       position: relative;
       width: 200px; height: 200px;
       margin: 0 auto 1.5rem;
       display: flex; align-items: center; justify-content: center;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    /* Spinning conic gradient ring */
-    .avatar-spin-ring {
-      position: absolute; inset: -5px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        var(--accent), var(--accent2), var(--accent3),
-        var(--accent2), var(--accent), var(--accent3), var(--accent)
-      );
-      animation: spinRing 3s linear infinite;
-      z-index: 1;
-    }
-    .avatar-spin-ring::after {
-      content: '';
-      position: absolute; inset: 3px;
-      border-radius: 50%;
-      background: var(--bg);
-    }
-
-    /* Glow halo */
-    .avatar-glow {
-      position: absolute; inset: -18px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,108,252,0.3) 0%, rgba(167,139,250,0.15) 50%, transparent 70%);
-      animation: glowPulse 2.5s ease-in-out infinite;
-      z-index: 0;
-    }
-
-    /* Orbit rings */
-    .orbit-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px dashed rgba(167,139,250,0.25);
-      z-index: 0;
-    }
-    .orbit-ring-1 {
-      width: 210px; height: 210px;
-      animation: spinOrbit 10s linear infinite;
-    }
-    .orbit-ring-2 {
-      width: 260px; height: 260px;
-      animation: spinOrbit 16s linear infinite reverse;
-    }
-
-    /* Orbiting dots */
-    .orbit-dot {
-      position: absolute;
-      border-radius: 50%;
-      top: 50%; left: 0;
-      transform-origin: 50% 50%;
-    }
-    .orbit-ring-1 .orbit-dot {
-      width: 9px; height: 9px; margin-top: -4.5px; margin-left: -4.5px;
-      background: var(--accent2);
-      box-shadow: 0 0 10px var(--accent2), 0 0 20px rgba(167,139,250,0.5);
-    }
-    .orbit-ring-1 .orbit-dot:nth-child(2) {
-      left: 100%; margin-left: -4.5px;
-      background: var(--accent3);
-      box-shadow: 0 0 10px var(--accent3), 0 0 20px rgba(56,189,248,0.5);
-    }
-    .orbit-ring-2 .orbit-dot {
-      width: 6px; height: 6px; margin-top: -3px; margin-left: -3px;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent), 0 0 16px rgba(124,108,252,0.5);
-    }
-    .orbit-ring-2 .orbit-dot:nth-child(2) {
-      left: 100%; margin-left: -3px;
-      top: 50%;
-      background: #f472b6;
-      box-shadow: 0 0 8px #f472b6, 0 0 16px rgba(244,114,182,0.5);
-    }
-    .orbit-ring-2 .orbit-dot:nth-child(3) {
-      left: 50%; top: 0; margin-top: -3px; margin-left: -3px;
-      background: var(--accent2);
-      box-shadow: 0 0 8px var(--accent2);
     }
 
     /* The actual image frame */
     .avatar-wrap {
-      width: 178px; height: 178px;
+      width: 186px; height: 186px;
       border-radius: 50%;
-      padding: 3px;
-      background: var(--bg);
+      border: 3px solid var(--accent);
       position: relative; z-index: 2;
       overflow: hidden;
     }
@@ -244,27 +150,11 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      transition: transform 0.5s cubic-bezier(.22,1,.36,1), filter 0.4s;
+      filter: grayscale(100%);
+      transition: filter 0.4s ease;
     }
-    .avatar-container:hover .avatar-wrap img {
-      transform: scale(1.08);
-      filter: brightness(1.08) saturate(1.15);
-    }
-    .avatar-container:hover .avatar-spin-ring {
-      animation-duration: 1s;
-    }
-    .avatar-container:hover .orbit-ring-1 {
-      animation-duration: 4s;
-    }
-    .avatar-container:hover .orbit-ring-2 {
-      animation-duration: 7s;
-    }
-
-    @keyframes spinRing  { to { transform: rotate(360deg); } }
-    @keyframes spinOrbit { to { transform: rotate(360deg); } }
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50%       { opacity: 1;   transform: scale(1.1); }
+    .avatar-wrap img:hover {
+      filter: grayscale(0%);
     }
 
     /* ── HERO ── */
@@ -409,34 +299,11 @@
       transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease, border-color 0.35s ease, opacity 0.35s ease;
       overflow: hidden;
     }
-    /* Scale down & dim unfocused cards */
-    .projects-grid:has(.project-card:hover) .project-card:not(:hover) {
-      transform: scale(0.95);
-      opacity: 0.55;
-    }
-    /* Shine sweep on hover */
-    .project-card::after {
-      content: '';
-      position: absolute;
-      top: -50%; left: -75%;
-      width: 50%; height: 200%;
-      background: linear-gradient(
-        105deg,
-        transparent 40%,
-        rgba(255,255,255,0.07) 50%,
-        transparent 60%
-      );
-      transition: left 0.55s ease;
-      pointer-events: none;
-      z-index: 2;
-    }
     .project-card:hover {
-      transform: translateY(-10px) scale(1.08);
+      transform: scale(1.03);
       border-color: var(--accent2);
-      box-shadow: 0 30px 70px rgba(124,108,252,0.32), 0 8px 24px rgba(0,0,0,0.35);
-      opacity: 1;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
-    .project-card:hover::after { left: 130%; }
     .project-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem; }
     .project-name {
       font-size: 1.15rem; font-weight: 700; letter-spacing: -0.3px;
@@ -615,10 +482,6 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
-      .avatar-container { animation: none; }
-      .avatar-spin-ring { animation: none; }
-      .orbit-ring       { animation: none; }
-      .orb              { animation: none; }
     }
 
     /* ── ANIMATIONS ── */
@@ -642,31 +505,6 @@
       from { opacity: 0; transform: translateX(40px); }
       to   { opacity: 1; transform: translateX(0); }
     }
-    @keyframes avatarPulse {
-      0%, 100% { box-shadow: 0 0 32px rgba(124,108,252,0.35); }
-      50%       { box-shadow: 0 0 55px rgba(124,108,252,0.65), 0 0 90px rgba(167,139,250,0.25); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-10px); }
-    }
-    @keyframes orbMove1 {
-      0%   { transform: translate(0, 0) scale(1); }
-      33%  { transform: translate(60px, -40px) scale(1.1); }
-      66%  { transform: translate(-30px, 50px) scale(0.95); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
-    @keyframes orbMove2 {
-      0%   { transform: translate(0, 0) scale(1); }
-      33%  { transform: translate(-50px, 60px) scale(1.05); }
-      66%  { transform: translate(40px, -30px) scale(0.9); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
-    @keyframes orbMove3 {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(30px, -50px); }
-      100% { transform: translate(0, 0); }
-    }
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50%       { opacity: 0; }
@@ -684,29 +522,6 @@
       to   { width: var(--w); }
     }
 
-    /* Hero orbs */
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(80px); pointer-events: none; z-index: 0;
-    }
-    .orb-1 {
-      width: 420px; height: 420px;
-      background: rgba(124,108,252,0.18);
-      top: -80px; left: -100px;
-      animation: orbMove1 14s ease-in-out infinite;
-    }
-    .orb-2 {
-      width: 340px; height: 340px;
-      background: rgba(56,189,248,0.12);
-      bottom: -60px; right: -60px;
-      animation: orbMove2 18s ease-in-out infinite;
-    }
-    .orb-3 {
-      width: 260px; height: 260px;
-      background: rgba(167,139,250,0.14);
-      top: 40%; left: 60%;
-      animation: orbMove3 10s ease-in-out infinite;
-    }
 
     /* Avatar pulse handled by .avatar-container */
 
@@ -791,29 +606,9 @@
     }
 
     /* ── PROJECT CARD SLIDE ANIMATIONS ── */
-    @keyframes slideInLeft {
-      0%   { opacity: 0; transform: translateX(-90px) rotate(-3deg) scale(0.93); }
-      65%  { opacity: 1; transform: translateX(6px) rotate(0.5deg) scale(1.01); }
-      100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
-    }
-    @keyframes slideInRight {
-      0%   { opacity: 0; transform: translateX(90px) rotate(3deg) scale(0.93); }
-      65%  { opacity: 1; transform: translateX(-6px) rotate(-0.5deg) scale(1.01); }
-      100% { opacity: 1; transform: translateX(0) rotate(0deg) scale(1); }
-    }
-    @keyframes slideInUp {
-      0%   { opacity: 0; transform: translateY(60px) scale(0.93); }
-      65%  { opacity: 1; transform: translateY(-4px) scale(1.01); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
     .project-card {
-      opacity: 0;
       position: relative; overflow: visible;
-      will-change: transform, opacity;
     }
-    .project-card.slide-left  { animation: slideInLeft  0.7s cubic-bezier(.22,1,.36,1) forwards; }
-    .project-card.slide-right { animation: slideInRight 0.7s cubic-bezier(.22,1,.36,1) forwards; }
-    .project-card.slide-up    { animation: slideInUp    0.7s cubic-bezier(.22,1,.36,1) forwards; }
 
     /* spotlight div — unused */
     .project-card .spotlight { display: none; }
@@ -824,6 +619,99 @@
       position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
       background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
       width: 0%; transition: width 0.1s linear;
+    }
+
+    /* ── CASE STUDY CARDS ── */
+    .case-study-card { cursor: pointer; }
+
+    /* ── CASE STUDY MODAL ── */
+    .case-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      padding: 1rem;
+    }
+    .case-modal-overlay.open {
+      opacity: 1; visibility: visible;
+    }
+    .case-modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 640px; width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.25s cubic-bezier(.22,1,.36,1);
+    }
+    .case-modal-overlay.open .case-modal {
+      transform: translateY(0) scale(1);
+    }
+    .case-modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--bg3); border: none;
+      color: var(--muted); font-size: 1.4rem;
+      width: 32px; height: 32px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s, background 0.2s;
+      line-height: 1;
+    }
+    .case-modal-close:hover { color: var(--text); background: var(--border); }
+    .case-modal-header {
+      display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .case-modal-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; flex-shrink: 0;
+    }
+    .case-modal-label {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--accent2); font-weight: 600; margin-bottom: 0.25rem;
+    }
+    .case-modal-title {
+      font-size: 1.4rem; font-weight: 700; color: var(--text); margin: 0 0 0.5rem;
+    }
+    .case-modal-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .case-modal-tech span {
+      background: var(--tag-bg); color: var(--accent2);
+      font-size: 0.72rem; padding: 2px 10px; border-radius: 20px;
+      font-weight: 500;
+    }
+    .case-modal-body { display: flex; flex-direction: column; gap: 1.25rem; }
+    .case-modal-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+    }
+    .case-modal-block-label {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--accent); margin-bottom: 0.65rem;
+    }
+    .case-modal-block p {
+      color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin: 0;
+    }
+    .case-modal-block ul {
+      margin: 0; padding-left: 0; list-style: none;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .case-modal-block ul li {
+      color: var(--muted); font-size: 0.9rem; line-height: 1.6;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+    }
+    .case-modal-block ul li::before {
+      content: '▸'; color: var(--accent); font-size: 0.75rem; margin-top: 3px; flex-shrink: 0;
+    }
+    .case-modal-footer {
+      margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem;
     }
   </style>
 </head>
@@ -839,9 +727,9 @@
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#case-studies">Case Studies</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#education">Education</a></li>
-    <li><a href="#certifications">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">
@@ -859,22 +747,8 @@
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
   <div class="hero-inner">
     <div class="avatar-container hero-anim-1">
-      <div class="avatar-glow"></div>
-      <div class="avatar-spin-ring"></div>
-      <div class="orbit-ring orbit-ring-1">
-        <span class="orbit-dot"></span>
-        <span class="orbit-dot"></span>
-      </div>
-      <div class="orbit-ring orbit-ring-2">
-        <span class="orbit-dot"></span>
-        <span class="orbit-dot"></span>
-        <span class="orbit-dot"></span>
-      </div>
       <div class="avatar-wrap">
         <img src="profile.jpeg" alt="Reena Vekariya" />
       </div>
@@ -1111,38 +985,6 @@
   </div>
   <div class="projects-grid">
 
-    <!-- Crypto-App -->
-    <div class="project-card"><div class="spotlight"></div>
-      <div class="project-header">
-        <div>
-          <div class="project-name">Crypto-App</div>
-        </div>
-        <div class="project-icon" style="background: linear-gradient(135deg,#1a2a1a,#1e5c1e);">₿</div>
-      </div>
-      <div class="project-tech">
-        <span>React Native</span><span>NestJS</span><span>MySQL</span><span>Ethereum</span>
-      </div>
-      <p class="project-desc">
-        Full-stack cryptocurrency trading platform with Ethereum wallet integration, real-time market
-        tracking, and a secure NestJS backend powering live price feeds and transaction history.
-      </p>
-      <div class="project-roles">
-        <div class="project-roles-title">Key Contributions</div>
-        <ul>
-          <li>Ethereum wallet integration and crypto transaction flows</li>
-          <li>Real-time market data tracking and price feeds</li>
-          <li>NestJS + MySQL backend architecture</li>
-          <li>Secure storage for wallet keys and credentials</li>
-        </ul>
-      </div>
-      <div class="project-links">
-        <a class="store-link ios" href="https://github.com/reena-vekariya/Crypto-App" target="_blank" rel="noopener">
-          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub · ⭐ 19
-        </a>
-      </div>
-    </div>
-
     <!-- Productivio -->
     <div class="project-card"><div class="spotlight"></div>
       <div class="project-header">
@@ -1360,8 +1202,52 @@
       </div>
     </div>
 
-    <!-- Beem -->
-    <div class="project-card"><div class="spotlight"></div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="case-studies" style="background: var(--bg2);">
+  <div class="section-header">
+    <div class="section-label">Case Studies</div>
+    <h2 class="section-title">Deep Dives</h2>
+    <p class="section-sub">Projects built for learning, exploration, and internal use.</p>
+  </div>
+  <div class="projects-grid">
+
+    <!-- Crypto-App -->
+    <div class="project-card case-study-card" data-case="crypto"><div class="spotlight"></div>
+      <div class="project-header">
+        <div>
+          <div class="project-name">Crypto-App</div>
+        </div>
+        <div class="project-icon" style="background: linear-gradient(135deg,#1a2a1a,#1e5c1e);">₿</div>
+      </div>
+      <div class="project-tech">
+        <span>React Native</span><span>NestJS</span><span>MySQL</span><span>Ethereum</span>
+      </div>
+      <p class="project-desc">
+        Full-stack cryptocurrency trading platform with Ethereum wallet integration, real-time market
+        tracking, and a secure NestJS backend powering live price feeds and transaction history.
+      </p>
+      <div class="project-roles">
+        <div class="project-roles-title">Key Contributions</div>
+        <ul>
+          <li>Ethereum wallet integration and crypto transaction flows</li>
+          <li>Real-time market data tracking and price feeds</li>
+          <li>NestJS + MySQL backend architecture</li>
+          <li>Secure storage for wallet keys and credentials</li>
+        </ul>
+      </div>
+      <div class="project-links">
+        <a class="store-link ios" href="https://github.com/reena-vekariya/Crypto-App" target="_blank" rel="noopener">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub · ⭐ 19
+        </a>
+      </div>
+    </div>
+
+    <!-- ExploreBeam -->
+    <div class="project-card case-study-card" data-case="explorebeam"><div class="spotlight"></div>
       <div class="project-header">
         <div>
           <div class="project-name">ExploreBeam</div>
@@ -1379,7 +1265,7 @@
         <div class="project-roles-title">Key Contributions</div>
         <ul>
           <li>Boilerplate for both Tourist and Supplier apps</li>
-          <li>Real-time chat with WebSockets (tourist ↔ supplier)</li>
+          <li>Real-time chat with WebSockets (tourist &harr; supplier)</li>
           <li>Location-based tour filters and recommendations</li>
           <li>Trip booking and payment flow</li>
         </ul>
@@ -1390,7 +1276,7 @@
     </div>
 
     <!-- ShopHub -->
-    <div class="project-card"><div class="spotlight"></div>
+    <div class="project-card case-study-card" data-case="shophub"><div class="spotlight"></div>
       <div class="project-header">
         <div>
           <div class="project-name">ShopHub</div>
@@ -1523,48 +1409,6 @@
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-header">
-    <div class="section-label">Certifications</div>
-    <h2 class="section-title">Credentials</h2>
-  </div>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
-    <div class="info-card" style="display:flex; align-items:flex-start; gap:1rem;">
-      <div style="width:48px; height:48px; border-radius:12px; flex-shrink:0; background:linear-gradient(135deg,#1a1a2e,#6c3483); display:flex; align-items:center; justify-content:center; font-size:1.4rem;">🤖</div>
-      <div>
-        <div class="info-card-title">Claude Code in Action</div>
-        <div class="info-card-sub">Anthropic</div>
-        <div class="info-card-detail">Issued March 20, 2026 &nbsp;·&nbsp; <a href="https://verify.skilljar.com/c/tj7gobsfav6u" target="_blank" rel="noopener" style="color:var(--accent2); text-decoration:none;">Verify ↗</a></div>
-      </div>
-    </div>
-    <div class="info-card" style="display:flex; align-items:flex-start; gap:1rem;">
-      <div style="width:48px; height:48px; border-radius:12px; flex-shrink:0; background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); display:flex; align-items:center; justify-content:center; font-size:1.4rem;">🔗</div>
-      <div>
-        <div class="info-card-title">Introduction to Model Context Protocol</div>
-        <div class="info-card-sub">Anthropic</div>
-        <div class="info-card-detail">Issued March 20, 2026 &nbsp;·&nbsp; <a href="https://verify.skilljar.com/c/9k7xyezbtycf" target="_blank" rel="noopener" style="color:var(--accent2); text-decoration:none;">Verify ↗</a></div>
-      </div>
-    </div>
-    <div class="info-card" style="display:flex; align-items:flex-start; gap:1rem;">
-      <div style="width:48px; height:48px; border-radius:12px; flex-shrink:0; background:linear-gradient(135deg,#1a3a4a,#1565c0); display:flex; align-items:center; justify-content:center; font-size:1.4rem;">🤝</div>
-      <div>
-        <div class="info-card-title">Introduction to Agent Skills</div>
-        <div class="info-card-sub">Anthropic</div>
-        <div class="info-card-detail">Issued March 2026</div>
-      </div>
-    </div>
-    <div class="info-card" style="display:flex; align-items:flex-start; gap:1rem;">
-      <div style="width:48px; height:48px; border-radius:12px; flex-shrink:0; background:linear-gradient(135deg,#1a2a4a,#2e4a8a); display:flex; align-items:center; justify-content:center; font-size:1.4rem;">⚡</div>
-      <div>
-        <div class="info-card-title">Claude with the Anthropic API</div>
-        <div class="info-card-sub">Anthropic</div>
-        <div class="info-card-detail">Issued March 23, 2026 &nbsp;·&nbsp; <a href="https://verify.skilljar.com/c/xz8shaz5452f" target="_blank" rel="noopener" style="color:var(--accent2); text-decoration:none;">Verify ↗</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-header">
@@ -1596,6 +1440,52 @@
   <p>Reena Vekariya &nbsp;·&nbsp; Sr. Software Engineer &amp; Engineering Manager</p>
   <p style="margin-top:0.4rem;">Ahmedabad, India &nbsp;·&nbsp; <a href="mailto:rina3295@gmail.com">rina3295@gmail.com</a></p>
 </footer>
+
+<!-- CASE STUDY MODAL -->
+<div id="case-modal" class="case-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="case-modal">
+    <button class="case-modal-close" id="modal-close" aria-label="Close">&times;</button>
+    <div class="case-modal-header">
+      <div class="case-modal-icon" id="modal-icon"></div>
+      <div>
+        <div class="case-modal-label">Case Study</div>
+        <h2 class="case-modal-title" id="modal-title"></h2>
+        <div class="case-modal-tech" id="modal-tech"></div>
+      </div>
+    </div>
+    <div class="case-modal-body">
+      <div class="case-modal-block">
+        <div class="case-modal-block-label">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Overview
+        </div>
+        <p id="modal-overview"></p>
+      </div>
+      <div class="case-modal-block">
+        <div class="case-modal-block-label">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Problem Statement
+        </div>
+        <p id="modal-problem"></p>
+      </div>
+      <div class="case-modal-block">
+        <div class="case-modal-block-label">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Solution
+        </div>
+        <p id="modal-solution"></p>
+      </div>
+      <div class="case-modal-block">
+        <div class="case-modal-block-label">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Key Challenges
+        </div>
+        <ul id="modal-challenges"></ul>
+      </div>
+    </div>
+    <div class="case-modal-footer" id="modal-footer"></div>
+  </div>
+</div>
 
 <script>
   // ── TYPEWRITER ──
@@ -1658,23 +1548,6 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
   skillCards.forEach(c => skillObserver.observe(c));
 
-  // ── PROJECT CARDS: alternating slide-in ──
-  const projectCards = Array.from(document.querySelectorAll('.project-card'));
-  const projectObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) {
-        e.target.classList.remove('slide-left', 'slide-right', 'slide-up');
-        return;
-      }
-      const idx = projectCards.indexOf(e.target);
-      setTimeout(() => {
-        if (idx % 3 === 0)      e.target.classList.add('slide-left');
-        else if (idx % 3 === 1) e.target.classList.add('slide-right');
-        else                    e.target.classList.add('slide-up');
-      }, (idx % 2) * 100);
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
-  projectCards.forEach(c => projectObserver.observe(c));
 
   // ── EXPERIENCE CARDS: slide-in from left + highlight stagger ──
   const expCards = Array.from(document.querySelectorAll('.exp-card'));
@@ -1785,7 +1658,95 @@
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     applyTheme(next);
   });
+
+  // ── CASE STUDY MODAL ──
+  const caseStudies = {
+    crypto: {
+      icon: '₿',
+      iconBg: 'linear-gradient(135deg,#1a2a1a,#1e5c1e)',
+      title: 'Crypto-App',
+      tech: ['React Native', 'NestJS', 'MySQL', 'Ethereum'],
+      overview: 'A full-stack cryptocurrency trading platform built to give users a seamless mobile experience for managing Ethereum wallets, monitoring live markets, and executing transactions — all from a single app backed by a secure NestJS API.',
+      problem: 'Users needed a single mobile interface to manage Ethereum wallets, track live crypto prices, and execute transactions securely — without exposing private keys or relying on centralised custody. Existing solutions were either too complex for casual users or lacked real-time market data.',
+      challenges: [
+        'Securing private keys on-device without a custodial service, across both iOS (Keychain) and Android (Keystore)',
+        'Streaming real-time price data efficiently without draining battery or overloading the UI thread',
+        'Handling Ethereum transaction signing and gas estimation reliably on a mobile connection',
+        'Keeping the NestJS + MySQL backend in sync with on-chain state during network congestion'
+      ],
+      solution: 'Built a full-stack platform pairing a React Native app with a NestJS + MySQL backend. Integrated Ethereum wallet creation and signing client-side using ethers.js, streamed live market data via WebSocket feeds, and stored sensitive credentials with encrypted secure storage. A clean dashboard surfaces price history, portfolio value, and transaction logs in one place.',
+      links: '<a class="store-link ios" href="https://github.com/reena-vekariya/Crypto-App" target="_blank" rel="noopener"><svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub · ⭐ 19</a>'
+    },
+    explorebeam: {
+      icon: '✈️',
+      iconBg: 'linear-gradient(135deg,#1a1a2e,#16213e)',
+      title: 'ExploreBeam',
+      tech: ['React Native', 'Socket.io'],
+      overview: 'A two-sided travel marketplace connecting tourists with local activity suppliers. Two dedicated React Native apps share a real-time Socket.io backend, enabling discovery, live chat, and end-to-end booking in one flow.',
+      problem: 'Tourists exploring a new city had no unified way to discover local activity providers, negotiate availability, and communicate in real time — while suppliers lacked a simple tool to publish their offerings and manage bookings on the go.',
+      challenges: [
+        'Designing two separate apps (Tourist & Supplier) with distinct UX flows from a single shared codebase',
+        'Implementing reliable real-time bidirectional chat over Socket.io with reconnection handling on flaky mobile networks',
+        'Building location-aware activity filtering that performs well without overloading the map view',
+        'Coordinating booking state between both apps so availability stays consistent without race conditions'
+      ],
+      solution: 'Developed two companion React Native apps sharing a Socket.io backend. Tourists browse location-aware activity listings with smart filters, chat directly with suppliers via WebSocket messaging, and complete bookings with an integrated payment flow. Suppliers manage their catalogue, set availability windows, and receive instant booking notifications — all without needing a web dashboard.',
+      links: '<span style="color: var(--muted); font-size: 0.8rem; align-self: center;">Internal deployment</span>'
+    },
+    shophub: {
+      icon: '🛍️',
+      iconBg: 'linear-gradient(135deg,#2a1a00,#6b3a00)',
+      title: 'ShopHub',
+      tech: ['Next.js', 'NestJS', 'MongoDB', 'React Native'],
+      overview: 'A multi-channel e-commerce platform serving web and mobile shoppers from a single NestJS + MongoDB backend, complete with a React Native app and a feature-rich admin dashboard for operations management.',
+      problem: 'A growing retail client needed a scalable e-commerce solution that served both web shoppers and mobile users from a single backend, with a powerful admin panel for managing orders, inventory, and customer analytics without engineering intervention.',
+      challenges: [
+        'Architecting a single NestJS API that efficiently served both the Next.js SSR storefront and the React Native app with different data-shape requirements',
+        'Optimising MongoDB queries for full-text product search and faceted filtering at scale',
+        'Keeping inventory counts consistent across web and mobile channels under concurrent order submissions',
+        'Building a real-time admin dashboard with live order and stock updates without polling'
+      ],
+      solution: 'Architected a full-stack platform: a Next.js storefront with SSR for fast page loads and SEO, a NestJS REST API backed by MongoDB for flexible product catalogues and order management, and a React Native companion app for on-the-go shopping. A feature-rich admin dashboard gave the client real-time visibility into inventory, revenue trends, and fulfilment status.',
+      links: '<a class="store-link ios" href="https://github.com/reena-vekariya/ECommerce-App" target="_blank" rel="noopener"><svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub</a>'
+    }
+  };
+
+  const overlay = document.getElementById('case-modal');
+  const modalClose = document.getElementById('modal-close');
+
+  function openModal(key) {
+    const data = caseStudies[key];
+    if (!data) return;
+    document.getElementById('modal-icon').style.background = data.iconBg;
+    document.getElementById('modal-icon').textContent = data.icon;
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-tech').innerHTML = data.tech.map(t => `<span>${t}</span>`).join('');
+    document.getElementById('modal-overview').textContent = data.overview;
+    document.getElementById('modal-problem').textContent = data.problem;
+    document.getElementById('modal-challenges').innerHTML = data.challenges.map(c => `<li>${c}</li>`).join('');
+    document.getElementById('modal-solution').textContent = data.solution;
+    document.getElementById('modal-footer').innerHTML = data.links;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.case-study-card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      openModal(card.dataset.case);
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
+
 
 </body>
 </html>
